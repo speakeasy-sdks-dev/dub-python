@@ -4,7 +4,7 @@ management:
   docChecksum: a8165462b93c33c03cc5540b2f764d0b
   docVersion: 0.0.1
   speakeasyVersion: internal
-  generationVersion: 2.404.11
+  generationVersion: 2.404.10
   releaseVersion: 0.7.2
   configChecksum: ec7d256a42c27d14e1b6541b5adaf784
   repoURL: https://github.com/dubinc/dub-python.git
