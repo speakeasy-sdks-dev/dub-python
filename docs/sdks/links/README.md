@@ -28,7 +28,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.list(request={
     "page": 1,
     "page_size": 50,
@@ -41,7 +40,6 @@ if res is not None:
         res = res.Next()
         if res is None:
             break
-
 
 ```
 
@@ -85,11 +83,12 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.create(request={
     "url": "https://google.com",
     "external_id": "123456",
-    "tag_ids": "[\"clux0rgak00011...\"]",
+    "tag_ids": [
+        "clux0rgak00011...",
+    ],
 })
 
 if res is not None:
@@ -138,7 +137,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.count()
 
 if res is not None:
@@ -186,7 +184,6 @@ from dub import Dub
 s = Dub(
     token="DUB_API_KEY",
 )
-
 
 res = s.links.get(request={
     "link_id": "clux0rgak00011...",
@@ -239,7 +236,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.delete(link_id="<value>")
 
 if res is not None:
@@ -287,7 +283,6 @@ from dub import Dub
 s = Dub(
     token="DUB_API_KEY",
 )
-
 
 res = s.links.update(link_id="<value>", request_body={
     "url": "https://google.com",
@@ -343,7 +338,6 @@ from dub import Dub
 s = Dub(
     token="DUB_API_KEY",
 )
-
 
 res = s.links.create_many(request=[
     {
@@ -401,14 +395,15 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.update_many(request={
     "link_ids": [
         "<value>",
     ],
     "data": {
         "url": "https://google.com",
-        "tag_ids": "[\"clux0rgak00011...\"]",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
     },
 })
 
@@ -457,7 +452,6 @@ from dub import Dub
 s = Dub(
     token="DUB_API_KEY",
 )
-
 
 res = s.links.upsert(request={
     "url": "https://google.com",
