@@ -216,9 +216,19 @@ asyncio.run(main())
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Handling errors in this SDK should largely match your expectations.  All operations return a response object or raise an error.  If Error objects are specified in your OpenAPI Spec, the SDK will raise the appropriate Error type.
+Handling errors in this SDK should largely match your expectations. All operations return a response object or raise an exception.
+By default, an API error will raise the `types.SDKError` exception, which has the following properties:
 
-| Error Object               | Status Code                | Content Type               |
+| Property        | Type             | Description           |
+|-----------------|------------------|-----------------------|
+| `.status_code`  | *int*            | The HTTP status code  |
+| `.message`      | *str*            | The error message     |
+| `.raw_response` | *httpx.Response* | The raw HTTP response |
+| `.body`         | *str*            | The response content  |
+
+In addition, when custom error responses are specified for an operation, the SDK may also raise their associated exception. For example, the `list_async` method may raise the following errors:
+
+| Exception Class            | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -229,13 +239,14 @@ Handling errors in this SDK should largely match your expectations.  All operati
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
+| types.SDKError             | 4XX, 5XX                   | \*/\*                      |
 
 ### Example
 
 ```python
 from dub import Dub
 from dub.models import errors
+from dub.types import BadRequestError, ForbiddenError, InternalServerError, NotFoundError, RateLimitError, SDKError, UnauthorizedError
 
 s = Dub(
     token="DUB_API_KEY",
@@ -259,14 +270,26 @@ try:
 except errors.BadRequest as e:
     # handle e.data: errors.BadRequestData
     raise(e)
+except BadRequestError as e:
+    # HTTP 400 Bad Request
+    raise(e)
 except errors.Unauthorized as e:
     # handle e.data: errors.UnauthorizedData
+    raise(e)
+except UnauthorizedError as e:
+    # HTTP 401 Authentication Error
     raise(e)
 except errors.Forbidden as e:
     # handle e.data: errors.ForbiddenData
     raise(e)
+except ForbiddenError as e:
+    # HTTP 403 Permission Denied
+    raise(e)
 except errors.NotFound as e:
     # handle e.data: errors.NotFoundData
+    raise(e)
+except NotFoundError as e:
+    # HTTP 404 Resource Not Found
     raise(e)
 except errors.Conflict as e:
     # handle e.data: errors.ConflictData
@@ -280,11 +303,17 @@ except errors.UnprocessableEntity as e:
 except errors.RateLimitExceeded as e:
     # handle e.data: errors.RateLimitExceededData
     raise(e)
+except RateLimitError as e:
+    # HTTP 429 Rate Limit Exceeded
+    raise(e)
 except errors.InternalServerError as e:
     # handle e.data: errors.InternalServerErrorData
     raise(e)
-except errors.SDKError as e:
-    # handle exception
+except InternalServerError as e:
+    # HTTP 500 Internal Server Error
+    raise(e)
+except SDKError as e:
+    # Default API Error
     raise(e)
 ```
 <!-- End Error Handling [errors] -->

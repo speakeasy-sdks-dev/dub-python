@@ -3,7 +3,7 @@
 from .sdkconfiguration import SDKConfiguration
 from dub import utils
 from dub._hooks import AfterErrorContext, AfterSuccessContext, BeforeRequestContext
-from dub.models import errors
+from dub.types import SDKError
 from dub.utils import RetryConfig, SerializedRequestBody, get_body_content
 import httpx
 from typing import Callable, List, Optional, Tuple
@@ -143,7 +143,7 @@ class BaseSDK:
 
             if http_res is None:
                 logger.debug("Raising no response SDK error")
-                raise errors.SDKError("No response received")
+                raise SDKError("No response received")
 
             logger.debug(
                 "Response:\nStatus Code: %s\nURL: %s\nHeaders: %s\nBody: %s",
@@ -164,8 +164,7 @@ class BaseSDK:
                     http_res = result
                 else:
                     logger.debug("Raising unexpected SDK error")
-                    raise errors.SDKError("Unexpected error occurred")
-
+                    raise SDKError("Unexpected error occurred")
             return http_res
 
         if retry_config is not None:
@@ -214,7 +213,7 @@ class BaseSDK:
 
             if http_res is None:
                 logger.debug("Raising no response SDK error")
-                raise errors.SDKError("No response received")
+                raise SDKError("No response received")
 
             logger.debug(
                 "Response:\nStatus Code: %s\nURL: %s\nHeaders: %s\nBody: %s",
@@ -235,7 +234,7 @@ class BaseSDK:
                     http_res = result
                 else:
                     logger.debug("Raising unexpected SDK error")
-                    raise errors.SDKError("Unexpected error occurred")
+                    raise SDKError("Unexpected error occurred")
 
             return http_res
 

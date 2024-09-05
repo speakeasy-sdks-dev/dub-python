@@ -4,7 +4,7 @@ from .basesdk import BaseSDK
 from dub import utils
 from dub._hooks import HookContext
 from dub.models import components, errors, operations
-from dub.types import BaseModel, OptionalNullable, UNSET
+from dub.types import BaseModel, OptionalNullable, SDKError, UNSET
 from jsonpath import JSONPath
 from typing import Any, Dict, List, Optional, Union, cast
 
@@ -131,10 +131,10 @@ class Domains(BaseSDK):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
         if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
+            raise SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
         
         content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        raise SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
 
     
     
@@ -258,10 +258,10 @@ class Domains(BaseSDK):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
         if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
+            raise SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
         
         content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        raise SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
 
     
     
@@ -361,10 +361,10 @@ class Domains(BaseSDK):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
         if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
+            raise SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
         
         content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        raise SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
 
     
     
@@ -464,10 +464,10 @@ class Domains(BaseSDK):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
         if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
+            raise SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
         
         content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        raise SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
 
     
     
@@ -566,10 +566,10 @@ class Domains(BaseSDK):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
         if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
+            raise SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
         
         content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        raise SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
 
     
     
@@ -668,10 +668,10 @@ class Domains(BaseSDK):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
         if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
+            raise SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
         
         content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        raise SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
 
     
     
@@ -774,10 +774,10 @@ class Domains(BaseSDK):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
         if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
+            raise SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
         
         content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        raise SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
 
     
     
@@ -880,9 +880,9 @@ class Domains(BaseSDK):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
         if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
+            raise SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
         
         content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        raise SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
 
     

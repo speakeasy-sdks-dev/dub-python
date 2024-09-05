@@ -51,7 +51,7 @@ if res is not None:
 
 ### Errors
 
-| Error Object               | Status Code                | Content Type               |
+| Exception Class            | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -62,8 +62,7 @@ if res is not None:
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
-
+| types.SDKError             | 4XX, 5XX                   | \*/\*                      |
 
 ## create
 
@@ -104,7 +103,7 @@ if res is not None:
 
 ### Errors
 
-| Error Object               | Status Code                | Content Type               |
+| Exception Class            | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -115,8 +114,7 @@ if res is not None:
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
-
+| types.SDKError             | 4XX, 5XX                   | \*/\*                      |
 
 ## delete
 
@@ -152,7 +150,7 @@ if res is not None:
 
 ### Errors
 
-| Error Object               | Status Code                | Content Type               |
+| Exception Class            | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -163,8 +161,7 @@ if res is not None:
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
-
+| types.SDKError             | 4XX, 5XX                   | \*/\*                      |
 
 ## update
 
@@ -206,7 +203,7 @@ if res is not None:
 
 ### Errors
 
-| Error Object               | Status Code                | Content Type               |
+| Exception Class            | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -217,4 +214,4 @@ if res is not None:
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
+| types.SDKError             | 4XX, 5XX                   | \*/\*                      |

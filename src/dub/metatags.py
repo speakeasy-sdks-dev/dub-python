@@ -3,8 +3,8 @@
 from .basesdk import BaseSDK
 from dub import utils
 from dub._hooks import HookContext
-from dub.models import errors, operations
-from dub.types import BaseModel, OptionalNullable, UNSET
+from dub.models import operations
+from dub.types import BaseModel, OptionalNullable, SDKError, UNSET
 from typing import Optional, Union, cast
 
 class Metatags(BaseSDK):
@@ -77,10 +77,10 @@ class Metatags(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.GetMetatagsResponseBody])
         if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
+            raise SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
         
         content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        raise SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
 
     
     
@@ -151,9 +151,9 @@ class Metatags(BaseSDK):
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, Optional[operations.GetMetatagsResponseBody])
         if utils.match_response(http_res, ["4XX","5XX"], "*"):
-            raise errors.SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
+            raise SDKError("API error occurred", http_res.status_code, http_res.text, http_res)
         
         content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
+        raise SDKError(f"Unexpected response received (code: {http_res.status_code}, type: {content_type})", http_res.status_code, http_res.text, http_res)
 
     
