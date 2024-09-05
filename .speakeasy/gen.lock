@@ -1,10 +1,10 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: eed7a2ad5cc93c07aac35e5c6d536a9a
+  docChecksum: a8165462b93c33c03cc5540b2f764d0b
   docVersion: 0.0.1
-  speakeasyVersion: 1.379.0
-  generationVersion: 2.404.3
+  speakeasyVersion: internal
+  generationVersion: 2.409.5
   releaseVersion: 0.7.2
   configChecksum: ec7d256a42c27d14e1b6541b5adaf784
   repoURL: https://github.com/dubinc/dub-python.git
@@ -14,7 +14,7 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.2
-    core: 5.4.1
+    core: 5.4.2
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.0
     envVarSecurityUsage: 0.3.1
@@ -135,6 +135,8 @@ generatedFiles:
   - src/dub/models/components/countrycode.py
   - src/dub/models/components/continentcode.py
   - src/dub/models/components/clickevents.py
+  - src/dub/models/components/leadevents.py
+  - src/dub/models/components/saleevents.py
   - src/dub/models/components/workspaceschema.py
   - src/dub/models/components/domainschema.py
   - src/dub/models/components/security.py
@@ -193,6 +195,7 @@ generatedFiles:
   - docs/models/operations/order.md
   - docs/models/operations/sortby.md
   - docs/models/operations/listeventsrequest.md
+  - docs/models/operations/listeventsresponsebody.md
   - docs/models/operations/getworkspacerequest.md
   - docs/models/operations/updateworkspacerequestbody.md
   - docs/models/operations/updateworkspacerequest.md
@@ -261,6 +264,8 @@ generatedFiles:
   - docs/models/components/countrycode.md
   - docs/models/components/continentcode.md
   - docs/models/components/clickevents.md
+  - docs/models/components/leadevents.md
+  - docs/models/components/saleevents.md
   - docs/models/components/plan.md
   - docs/models/components/role.md
   - docs/models/components/users.md
