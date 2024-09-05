@@ -71,7 +71,9 @@ s = Dub(
 res = s.links.create(request={
     "url": "https://google.com",
     "external_id": "123456",
-    "tag_ids": "[\"clux0rgak00011...\"]",
+    "tag_ids": [
+        "clux0rgak00011...",
+    ],
 })
 
 if res is not None:
@@ -94,7 +96,9 @@ async def main():
     res = await s.links.create_async(request={
         "url": "https://google.com",
         "external_id": "123456",
-        "tag_ids": "[\"clux0rgak00011...\"]",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
     })
     if res is not None:
         # handle response
@@ -141,7 +145,9 @@ async def main():
     res = await s.links.upsert_async(request={
         "url": "https://google.com",
         "external_id": "123456",
-        "tag_ids": "[\"clux0rgak00011...\"]",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
     })
     if res is not None:
         # handle response
