@@ -11,15 +11,45 @@
 
 Learn more about the Dub.co Python SDK in the [official documentation](https://dub.co/docs/sdks/python/overview).
 
+<!-- Start Summary [summary] -->
+## Summary
+
+Dub.co API: Dub is link management infrastructure for companies to create marketing campaigns, link sharing features, and referral programs.
+<!-- End Summary [summary] -->
+
+<!-- Start Table of Contents [toc] -->
+## Table of Contents
+
+* [SDK Installation](#sdk-installation)
+* [IDE Support](#ide-support)
+* [SDK Example Usage](#sdk-example-usage)
+* [Available Resources and Operations](#available-resources-and-operations)
+* [Pagination](#pagination)
+* [Retries](#retries)
+* [Error Handling](#error-handling)
+* [Server Selection](#server-selection)
+* [Custom HTTP Client](#custom-http-client)
+* [Authentication](#authentication)
+* [Debugging](#debugging)
+<!-- End Table of Contents [toc] -->
+
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-PIP
+The SDK can be installed with either *pip* or *poetry* package managers.
+
+### PIP
+
+*PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
+
 ```bash
 pip install dub
 ```
 
-Poetry
+### Poetry
+
+*Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
+
 ```bash
 poetry add dub
 ```
@@ -38,11 +68,12 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.create(request={
     "url": "https://google.com",
     "external_id": "123456",
-    "tag_ids": "[\"clux0rgak00011...\"]",
+    "tag_ids": [
+        "clux0rgak00011...",
+    ],
 })
 
 if res is not None:
@@ -65,7 +96,9 @@ async def main():
     res = await s.links.create_async(request={
         "url": "https://google.com",
         "external_id": "123456",
-        "tag_ids": "[\"clux0rgak00011...\"]",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
     })
     if res is not None:
         # handle response
@@ -83,7 +116,6 @@ from dub import Dub
 s = Dub(
     token="DUB_API_KEY",
 )
-
 
 res = s.links.upsert(request={
     "url": "https://google.com",
@@ -113,7 +145,9 @@ async def main():
     res = await s.links.upsert_async(request={
         "url": "https://google.com",
         "external_id": "123456",
-        "tag_ids": "[\"clux0rgak00011...\"]",
+        "tag_ids": [
+            "clux0rgak00011...",
+        ],
     })
     if res is not None:
         # handle response
@@ -210,50 +244,48 @@ s = Dub(
 res = None
 try:
     res = s.links.list(request={
-    "page": 1,
-    "page_size": 50,
-})
+        "page": 1,
+        "page_size": 50,
+    })
+
+    if res is not None:
+        while True:
+            # handle items
+
+            res = res.Next()
+            if res is None:
+                break
 
 except errors.BadRequest as e:
-    # handle exception
+    # handle e.data: errors.BadRequestData
     raise(e)
 except errors.Unauthorized as e:
-    # handle exception
+    # handle e.data: errors.UnauthorizedData
     raise(e)
 except errors.Forbidden as e:
-    # handle exception
+    # handle e.data: errors.ForbiddenData
     raise(e)
 except errors.NotFound as e:
-    # handle exception
+    # handle e.data: errors.NotFoundData
     raise(e)
 except errors.Conflict as e:
-    # handle exception
+    # handle e.data: errors.ConflictData
     raise(e)
 except errors.InviteExpired as e:
-    # handle exception
+    # handle e.data: errors.InviteExpiredData
     raise(e)
 except errors.UnprocessableEntity as e:
-    # handle exception
+    # handle e.data: errors.UnprocessableEntityData
     raise(e)
 except errors.RateLimitExceeded as e:
-    # handle exception
+    # handle e.data: errors.RateLimitExceededData
     raise(e)
 except errors.InternalServerError as e:
-    # handle exception
+    # handle e.data: errors.InternalServerErrorData
     raise(e)
 except errors.SDKError as e:
     # handle exception
     raise(e)
-
-if res is not None:
-    while True:
-        # handle items
-
-        res = res.Next()
-        if res is None:
-            break
-
-
 ```
 <!-- End Error Handling [errors] -->
 
@@ -278,7 +310,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.list(request={
     "page": 1,
     "page_size": 50,
@@ -291,7 +322,6 @@ if res is not None:
         res = res.Next()
         if res is None:
             break
-
 
 ```
 
@@ -307,7 +337,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.list(request={
     "page": 1,
     "page_size": 50,
@@ -320,7 +349,6 @@ if res is not None:
         res = res.Next()
         if res is None:
             break
-
 
 ```
 <!-- End Server Selection [server] -->
@@ -425,7 +453,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.list(request={
     "page": 1,
     "page_size": 50,
@@ -438,7 +465,6 @@ if res is not None:
         res = res.Next()
         if res is None:
             break
-
 
 ```
 <!-- End Authentication [security] -->
@@ -457,7 +483,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.list(request={
     "page": 1,
     "page_size": 50,
@@ -472,7 +497,6 @@ if res is not None:
         if res is None:
             break
 
-
 ```
 
 If you'd like to override the default retry strategy for all operations that support retries, you can use the `retry_config` optional parameter when initializing the SDK:
@@ -484,7 +508,6 @@ s = Dub(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     token="DUB_API_KEY",
 )
-
 
 res = s.links.list(request={
     "page": 1,
@@ -498,7 +521,6 @@ if res is not None:
         res = res.Next()
         if res is None:
             break
-
 
 ```
 <!-- End Retries [retries] -->
@@ -518,7 +540,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.links.list(request={
     "page": 1,
     "page_size": 50,
@@ -531,7 +552,6 @@ if res is not None:
         res = res.Next()
         if res is None:
             break
-
 
 ```
 <!-- End Pagination [pagination] -->
