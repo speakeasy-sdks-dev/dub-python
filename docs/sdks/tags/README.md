@@ -22,7 +22,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.tags.list()
 
 if res is not None:
@@ -69,7 +68,6 @@ from dub import Dub
 s = Dub(
     token="DUB_API_KEY",
 )
-
 
 res = s.tags.create()
 
@@ -119,8 +117,7 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
-res = s.tags.update(id="<value>")
+res = s.tags.update(id="<id>")
 
 if res is not None:
     # handle response

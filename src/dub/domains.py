@@ -17,7 +17,7 @@ class Domains(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> operations.ListDomainsResponse:
+    ) -> Optional[operations.ListDomainsResponse]:
         r"""Retrieve a list of domains
 
         Retrieve a list of domains associated with the authenticated workspace.
@@ -144,7 +144,7 @@ class Domains(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> operations.ListDomainsResponse:
+    ) -> Optional[operations.ListDomainsResponse]:
         r"""Retrieve a list of domains
 
         Retrieve a list of domains associated with the authenticated workspace.
