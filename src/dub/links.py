@@ -17,7 +17,7 @@ class Links(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Optional[operations.GetLinksResponse]:
+    ) -> operations.GetLinksResponse:
         r"""Retrieve a list of links
 
         Retrieve a paginated list of links for the authenticated workspace.
@@ -151,7 +151,7 @@ class Links(BaseSDK):
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Optional[operations.GetLinksResponse]:
+    ) -> operations.GetLinksResponse:
         r"""Retrieve a list of links
 
         Retrieve a paginated list of links for the authenticated workspace.
