@@ -10,11 +10,11 @@ class LeadsBrowsersTypedDict(TypedDict):
     r"""The name of the browser"""
     leads: float
     r"""The number of leads from this browser"""
-    
+
 
 class LeadsBrowsers(BaseModel):
     browser: str
     r"""The name of the browser"""
+
     leads: float
     r"""The number of leads from this browser"""
-    

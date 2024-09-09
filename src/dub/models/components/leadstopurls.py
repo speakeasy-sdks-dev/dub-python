@@ -10,11 +10,11 @@ class LeadsTopUrlsTypedDict(TypedDict):
     r"""The destination URL"""
     leads: float
     r"""The number of leads from this URL"""
-    
+
 
 class LeadsTopUrls(BaseModel):
     url: str
     r"""The destination URL"""
+
     leads: float
     r"""The number of leads from this URL"""
-    

@@ -12,13 +12,14 @@ class SalesBrowsersTypedDict(TypedDict):
     r"""The number of sales from this browser"""
     amount: float
     r"""The total amount of sales from this browser"""
-    
+
 
 class SalesBrowsers(BaseModel):
     browser: str
     r"""The name of the browser"""
+
     sales: float
     r"""The number of sales from this browser"""
+
     amount: float
     r"""The total amount of sales from this browser"""
-    

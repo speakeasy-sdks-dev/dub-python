@@ -10,11 +10,11 @@ class LeadsDevicesTypedDict(TypedDict):
     r"""The name of the device"""
     leads: float
     r"""The number of leads from this device"""
-    
+
 
 class LeadsDevices(BaseModel):
     device: str
     r"""The name of the device"""
+
     leads: float
     r"""The number of leads from this device"""
-    

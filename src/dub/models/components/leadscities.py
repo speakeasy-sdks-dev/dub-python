@@ -8,6 +8,7 @@ from typing import TypedDict
 
 class LeadsCitiesCountry(str, Enum):
     r"""The 2-letter country code of the city: https://d.to/geo"""
+
     AF = "AF"
     AL = "AL"
     DZ = "DZ"
@@ -259,6 +260,7 @@ class LeadsCitiesCountry(str, Enum):
     SS = "SS"
     XK = "XK"
 
+
 class LeadsCitiesTypedDict(TypedDict):
     city: str
     r"""The name of the city"""
@@ -266,13 +268,14 @@ class LeadsCitiesTypedDict(TypedDict):
     r"""The 2-letter country code of the city: https://d.to/geo"""
     leads: float
     r"""The number of leads from this city"""
-    
+
 
 class LeadsCities(BaseModel):
     city: str
     r"""The name of the city"""
+
     country: LeadsCitiesCountry
     r"""The 2-letter country code of the city: https://d.to/geo"""
+
     leads: float
     r"""The number of leads from this city"""
-    

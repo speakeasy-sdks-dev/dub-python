@@ -10,11 +10,11 @@ class LeadsTimeseriesTypedDict(TypedDict):
     r"""The starting timestamp of the interval"""
     leads: float
     r"""The number of leads in the interval"""
-    
+
 
 class LeadsTimeseries(BaseModel):
     start: str
     r"""The starting timestamp of the interval"""
+
     leads: float
     r"""The number of leads in the interval"""
-    

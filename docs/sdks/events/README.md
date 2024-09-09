@@ -20,7 +20,6 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-
 res = s.events.list(request={
     "timezone": "America/New_York",
     "city": "New York",
@@ -45,7 +44,7 @@ if res is not None:
 
 ### Response
 
-**[List[components.ClickEvents]](../../models/.md)**
+**[operations.ListEventsResponseBody](../../models/operations/listeventsresponsebody.md)**
 
 ### Errors
 
