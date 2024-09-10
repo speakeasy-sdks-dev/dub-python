@@ -4,7 +4,7 @@ management:
   docChecksum: a8165462b93c33c03cc5540b2f764d0b
   docVersion: 0.0.1
   speakeasyVersion: internal
-  generationVersion: 2.415.1
+  generationVersion: 2.415.0
   releaseVersion: 0.7.2
   configChecksum: ec7d256a42c27d14e1b6541b5adaf784
   repoURL: https://github.com/dubinc/dub-python.git
@@ -14,7 +14,7 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.2
-    core: 5.5.0
+    core: 5.5.1
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.0
     envVarSecurityUsage: 0.3.1
