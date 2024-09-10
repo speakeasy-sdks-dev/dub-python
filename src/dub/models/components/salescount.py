@@ -10,11 +10,11 @@ class SalesCountTypedDict(TypedDict):
     r"""The total number of sales"""
     amount: float
     r"""The total amount of sales"""
-    
+
 
 class SalesCount(BaseModel):
     sales: float
     r"""The total number of sales"""
+
     amount: float
     r"""The total amount of sales"""
-    

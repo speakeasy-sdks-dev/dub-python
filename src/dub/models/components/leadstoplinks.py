@@ -24,23 +24,34 @@ class LeadsTopLinksTypedDict(TypedDict):
     r"""The creation timestamp of the short link"""
     leads: float
     r"""The number of leads from this link"""
-    
+
 
 class LeadsTopLinks(BaseModel):
-    link: Annotated[str, pydantic.Field(deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible.")]
+    link: Annotated[
+        str,
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ]
     r"""The unique ID of the short link"""
+
     id: str
     r"""The unique ID of the short link"""
+
     domain: str
     r"""The domain of the short link"""
+
     key: str
     r"""The key of the short link"""
+
     short_link: Annotated[str, pydantic.Field(alias="shortLink")]
     r"""The short link URL"""
+
     url: str
     r"""The destination URL of the short link"""
+
     created_at: Annotated[str, pydantic.Field(alias="createdAt")]
     r"""The creation timestamp of the short link"""
+
     leads: float
     r"""The number of leads from this link"""
-    

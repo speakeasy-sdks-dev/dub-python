@@ -22,29 +22,53 @@ class ClickEventsTypedDict(TypedDict):
     referer: Nullable[str]
     ip: Nullable[str]
     qr: Nullable[float]
-    
+
 
 class ClickEvents(BaseModel):
     timestamp: str
+
     click_id: str
+
     link_id: str
+
     domain: str
+
     key: str
+
     url: str
+
     continent: Nullable[str]
+
     country: Nullable[str]
+
     city: Nullable[str]
+
     device: Nullable[str]
+
     browser: Nullable[str]
+
     os: Nullable[str]
+
     referer: Nullable[str]
+
     ip: Nullable[str]
+
     qr: Nullable[float]
-    
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = []
-        nullable_fields = ["continent", "country", "city", "device", "browser", "os", "referer", "ip", "qr"]
+        nullable_fields = [
+            "continent",
+            "country",
+            "city",
+            "device",
+            "browser",
+            "os",
+            "referer",
+            "ip",
+            "qr",
+        ]
         null_default_fields = []
 
         serialized = handler(self)
@@ -54,9 +78,13 @@ class ClickEvents(BaseModel):
         for n, f in self.model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
+            serialized.pop(k, None)
 
             optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (self.__pydantic_fields_set__.intersection({n}) or k in null_default_fields) # pylint: disable=no-member
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
 
             if val is not None and val != UNSET_SENTINEL:
                 m[k] = val
@@ -66,4 +94,3 @@ class ClickEvents(BaseModel):
                 m[k] = val
 
         return m
-        

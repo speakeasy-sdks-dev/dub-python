@@ -8,6 +8,7 @@ from typing import TypedDict
 
 class Country(str, Enum):
     r"""The 2-letter ISO 3166-1 country code for the country associated with the location of the user. Learn more: https://d.to/geo"""
+
     AF = "AF"
     AL = "AL"
     DZ = "DZ"
@@ -259,16 +260,17 @@ class Country(str, Enum):
     SS = "SS"
     XK = "XK"
 
+
 class ClicksCountriesTypedDict(TypedDict):
     country: Country
     r"""The 2-letter ISO 3166-1 country code for the country associated with the location of the user. Learn more: https://d.to/geo"""
     clicks: float
     r"""The number of clicks from this country"""
-    
+
 
 class ClicksCountries(BaseModel):
     country: Country
     r"""The 2-letter ISO 3166-1 country code for the country associated with the location of the user. Learn more: https://d.to/geo"""
+
     clicks: float
     r"""The number of clicks from this country"""
-    

@@ -8,9 +8,8 @@ from typing import TypedDict
 class ClicksCountTypedDict(TypedDict):
     clicks: float
     r"""The total number of clicks"""
-    
+
 
 class ClicksCount(BaseModel):
     clicks: float
     r"""The total number of clicks"""
-    

@@ -12,13 +12,14 @@ class SalesTopUrlsTypedDict(TypedDict):
     r"""The number of sales from this URL"""
     amount: float
     r"""The total amount of sales from this URL"""
-    
+
 
 class SalesTopUrls(BaseModel):
     url: str
     r"""The destination URL"""
+
     sales: float
     r"""The number of sales from this URL"""
+
     amount: float
     r"""The total amount of sales from this URL"""
-    

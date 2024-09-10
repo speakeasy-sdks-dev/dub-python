@@ -12,13 +12,14 @@ class SalesOSTypedDict(TypedDict):
     r"""The number of sales from this OS"""
     amount: float
     r"""The total amount of sales from this OS"""
-    
+
 
 class SalesOS(BaseModel):
     os: str
     r"""The name of the OS"""
+
     sales: float
     r"""The number of sales from this OS"""
+
     amount: float
     r"""The total amount of sales from this OS"""
-    

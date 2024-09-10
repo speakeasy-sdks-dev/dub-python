@@ -8,9 +8,8 @@ from typing import TypedDict
 class LeadsCountTypedDict(TypedDict):
     leads: float
     r"""The total number of leads"""
-    
+
 
 class LeadsCount(BaseModel):
     leads: float
     r"""The total number of leads"""
-    
