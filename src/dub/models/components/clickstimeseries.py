@@ -10,11 +10,11 @@ class ClicksTimeseriesTypedDict(TypedDict):
     r"""The starting timestamp of the interval"""
     clicks: float
     r"""The number of clicks in the interval"""
-    
+
 
 class ClicksTimeseries(BaseModel):
     start: str
     r"""The starting timestamp of the interval"""
+
     clicks: float
     r"""The number of clicks in the interval"""
-    

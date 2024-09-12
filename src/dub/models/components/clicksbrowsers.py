@@ -10,11 +10,11 @@ class ClicksBrowsersTypedDict(TypedDict):
     r"""The name of the browser"""
     clicks: float
     r"""The number of clicks from this browser"""
-    
+
 
 class ClicksBrowsers(BaseModel):
     browser: str
     r"""The name of the browser"""
+
     clicks: float
     r"""The number of clicks from this browser"""
-    

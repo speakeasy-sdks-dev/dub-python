@@ -10,11 +10,11 @@ class LeadsReferersTypedDict(TypedDict):
     r"""The name of the referer. If unknown, this will be `(direct)`"""
     leads: float
     r"""The number of leads from this referer"""
-    
+
 
 class LeadsReferers(BaseModel):
     referer: str
     r"""The name of the referer. If unknown, this will be `(direct)`"""
+
     leads: float
     r"""The number of leads from this referer"""
-    

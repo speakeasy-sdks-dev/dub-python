@@ -12,13 +12,14 @@ class SalesReferersTypedDict(TypedDict):
     r"""The number of sales from this referer"""
     amount: float
     r"""The total amount of sales from this referer"""
-    
+
 
 class SalesReferers(BaseModel):
     referer: str
     r"""The name of the referer. If unknown, this will be `(direct)`"""
+
     sales: float
     r"""The number of sales from this referer"""
+
     amount: float
     r"""The total amount of sales from this referer"""
-    

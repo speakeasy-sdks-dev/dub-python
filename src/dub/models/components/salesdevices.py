@@ -12,13 +12,14 @@ class SalesDevicesTypedDict(TypedDict):
     r"""The number of sales from this device"""
     amount: float
     r"""The total amount of sales from this device"""
-    
+
 
 class SalesDevices(BaseModel):
     device: str
     r"""The name of the device"""
+
     sales: float
     r"""The number of sales from this device"""
+
     amount: float
     r"""The total amount of sales from this device"""
-    

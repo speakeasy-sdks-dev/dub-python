@@ -10,11 +10,11 @@ class ClicksDevicesTypedDict(TypedDict):
     r"""The name of the device"""
     clicks: float
     r"""The number of clicks from this device"""
-    
+
 
 class ClicksDevices(BaseModel):
     device: str
     r"""The name of the device"""
+
     clicks: float
     r"""The number of clicks from this device"""
-    

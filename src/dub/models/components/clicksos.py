@@ -10,11 +10,11 @@ class ClicksOSTypedDict(TypedDict):
     r"""The name of the OS"""
     clicks: float
     r"""The number of clicks from this OS"""
-    
+
 
 class ClicksOS(BaseModel):
     os: str
     r"""The name of the OS"""
+
     clicks: float
     r"""The number of clicks from this OS"""
-    

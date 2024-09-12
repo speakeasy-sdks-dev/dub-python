@@ -12,13 +12,14 @@ class SalesTimeseriesTypedDict(TypedDict):
     r"""The number of sales in the interval"""
     amount: float
     r"""The total amount of sales in the interval"""
-    
+
 
 class SalesTimeseries(BaseModel):
     start: str
     r"""The starting timestamp of the interval"""
+
     sales: float
     r"""The number of sales in the interval"""
+
     amount: float
     r"""The total amount of sales in the interval"""
-    

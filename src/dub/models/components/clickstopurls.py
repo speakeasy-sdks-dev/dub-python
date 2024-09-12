@@ -10,11 +10,11 @@ class ClicksTopUrlsTypedDict(TypedDict):
     r"""The destination URL"""
     clicks: float
     r"""The number of clicks from this URL"""
-    
+
 
 class ClicksTopUrls(BaseModel):
     url: str
     r"""The destination URL"""
+
     clicks: float
     r"""The number of clicks from this URL"""
-    

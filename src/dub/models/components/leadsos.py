@@ -10,11 +10,11 @@ class LeadsOSTypedDict(TypedDict):
     r"""The name of the OS"""
     leads: float
     r"""The number of leads from this OS"""
-    
+
 
 class LeadsOS(BaseModel):
     os: str
     r"""The name of the OS"""
+
     leads: float
     r"""The number of leads from this OS"""
-    
