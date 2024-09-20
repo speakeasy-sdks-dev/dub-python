@@ -396,7 +396,7 @@ actions:
             )
 
             res = s.qr_codes.get(request={
-                "url": "https://brief-micronutrient.org",
+                "url": "https://normal-making.name",
             })
 
             if res is not None:
@@ -524,7 +524,7 @@ actions:
             res = s.track.sale(request={
                 "customer_id": "<value>",
                 "amount": 996500,
-                "payment_processor": operations.PaymentProcessor.SHOPIFY,
+                "payment_processor": operations.PaymentProcessor.PADDLE,
                 "event_name": "Purchase",
             })
 
