@@ -348,9 +348,11 @@ class Links(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.CreateLinkRequestBody)
-        request = cast(operations.CreateLinkRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.CreateLinkRequestBody]
+            )
+        request = cast(Optional[operations.CreateLinkRequestBody], request)
 
         req = self.build_request(
             method="POST",
@@ -474,9 +476,11 @@ class Links(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.CreateLinkRequestBody)
-        request = cast(operations.CreateLinkRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.CreateLinkRequestBody]
+            )
+        request = cast(Optional[operations.CreateLinkRequestBody], request)
 
         req = self.build_request_async(
             method="POST",
@@ -1587,9 +1591,9 @@ class Links(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, List[operations.RequestBody])
-        request = cast(List[operations.RequestBody], request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, Optional[List[operations.RequestBody]])
+        request = cast(Optional[List[operations.RequestBody]], request)
 
         req = self.build_request(
             method="POST",
@@ -1712,9 +1716,9 @@ class Links(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, List[operations.RequestBody])
-        request = cast(List[operations.RequestBody], request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, Optional[List[operations.RequestBody]])
+        request = cast(Optional[List[operations.RequestBody]], request)
 
         req = self.build_request_async(
             method="POST",
@@ -2086,9 +2090,11 @@ class Links(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.BulkUpdateLinksRequestBody)
-        request = cast(operations.BulkUpdateLinksRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.BulkUpdateLinksRequestBody]
+            )
+        request = cast(Optional[operations.BulkUpdateLinksRequestBody], request)
 
         req = self.build_request(
             method="PATCH",
@@ -2218,9 +2224,11 @@ class Links(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.BulkUpdateLinksRequestBody)
-        request = cast(operations.BulkUpdateLinksRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.BulkUpdateLinksRequestBody]
+            )
+        request = cast(Optional[operations.BulkUpdateLinksRequestBody], request)
 
         req = self.build_request_async(
             method="PATCH",
@@ -2350,9 +2358,11 @@ class Links(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.UpsertLinkRequestBody)
-        request = cast(operations.UpsertLinkRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.UpsertLinkRequestBody]
+            )
+        request = cast(Optional[operations.UpsertLinkRequestBody], request)
 
         req = self.build_request(
             method="PUT",
@@ -2476,9 +2486,11 @@ class Links(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.UpsertLinkRequestBody)
-        request = cast(operations.UpsertLinkRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.UpsertLinkRequestBody]
+            )
+        request = cast(Optional[operations.UpsertLinkRequestBody], request)
 
         req = self.build_request_async(
             method="PUT",

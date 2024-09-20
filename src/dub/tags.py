@@ -265,9 +265,11 @@ class Tags(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.CreateTagRequestBody)
-        request = cast(operations.CreateTagRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.CreateTagRequestBody]
+            )
+        request = cast(Optional[operations.CreateTagRequestBody], request)
 
         req = self.build_request(
             method="POST",
@@ -391,9 +393,11 @@ class Tags(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.CreateTagRequestBody)
-        request = cast(operations.CreateTagRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.CreateTagRequestBody]
+            )
+        request = cast(Optional[operations.CreateTagRequestBody], request)
 
         req = self.build_request_async(
             method="POST",

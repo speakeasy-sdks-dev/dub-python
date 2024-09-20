@@ -338,9 +338,11 @@ class Domains(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.CreateDomainRequestBody)
-        request = cast(operations.CreateDomainRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.CreateDomainRequestBody]
+            )
+        request = cast(Optional[operations.CreateDomainRequestBody], request)
 
         req = self.build_request(
             method="POST",
@@ -470,9 +472,11 @@ class Domains(BaseSDK):
         if server_url is not None:
             base_url = server_url
 
-        if not isinstance(request, BaseModel) and request is not None:
-            request = utils.unmarshal(request, operations.CreateDomainRequestBody)
-        request = cast(operations.CreateDomainRequestBody, request)
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(
+                request, Optional[operations.CreateDomainRequestBody]
+            )
+        request = cast(Optional[operations.CreateDomainRequestBody], request)
 
         req = self.build_request_async(
             method="POST",
