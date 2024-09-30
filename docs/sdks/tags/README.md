@@ -5,10 +5,56 @@
 
 ### Available Operations
 
-* [create](#create) - Create a new tag
 * [list](#list) - Retrieve a list of tags
-* [update](#update) - Update a tag
+* [create](#create) - Create a new tag
 * [delete](#delete) - Delete a tag
+* [update](#update) - Update a tag
+
+## list
+
+Retrieve a list of tags for the authenticated workspace.
+
+### Example Usage
+
+```python
+from dub import Dub
+
+s = Dub(
+    token="DUB_API_KEY",
+)
+
+res = s.tags.list()
+
+if res is not None:
+    # handle response
+    pass
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[List[components.TagSchema]](../../models/.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.BadRequest          | 400                        | application/json           |
+| errors.Unauthorized        | 401                        | application/json           |
+| errors.Forbidden           | 403                        | application/json           |
+| errors.NotFound            | 404                        | application/json           |
+| errors.Conflict            | 409                        | application/json           |
+| errors.InviteExpired       | 410                        | application/json           |
+| errors.UnprocessableEntity | 422                        | application/json           |
+| errors.RateLimitExceeded   | 429                        | application/json           |
+| errors.InternalServerError | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## create
 
@@ -44,7 +90,7 @@ if res is not None:
 
 ### Errors
 
-| Error Object               | Status Code                | Content Type               |
+| Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -55,12 +101,11 @@ if res is not None:
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
+## delete
 
-## list
-
-Retrieve a list of tags for the authenticated workspace.
+Delete a tag from the workspace. All existing links will still work, but they will no longer be associated with this tag.
 
 ### Example Usage
 
@@ -71,7 +116,7 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-res = s.tags.list()
+res = s.tags.delete(id="<id>")
 
 if res is not None:
     # handle response
@@ -83,15 +128,16 @@ if res is not None:
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | The ID of the tag to delete.                                        |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[List[components.TagSchema]](../../models/.md)**
+**[operations.DeleteTagResponseBody](../../models/operations/deletetagresponsebody.md)**
 
 ### Errors
 
-| Error Object               | Status Code                | Content Type               |
+| Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -102,8 +148,7 @@ if res is not None:
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
-
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update
 
@@ -140,7 +185,7 @@ if res is not None:
 
 ### Errors
 
-| Error Object               | Status Code                | Content Type               |
+| Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -151,52 +196,4 @@ if res is not None:
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
-
-
-## delete
-
-Delete a tag from the workspace. All existing links will still work, but they will no longer be associated with this tag.
-
-### Example Usage
-
-```python
-from dub import Dub
-
-s = Dub(
-    token="DUB_API_KEY",
-)
-
-res = s.tags.delete(id="<id>")
-
-if res is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | The ID of the tag to delete.                                        |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
-
-### Response
-
-**[operations.DeleteTagResponseBody](../../models/operations/deletetagresponsebody.md)**
-
-### Errors
-
-| Error Object               | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.BadRequest          | 400                        | application/json           |
-| errors.Unauthorized        | 401                        | application/json           |
-| errors.Forbidden           | 403                        | application/json           |
-| errors.NotFound            | 404                        | application/json           |
-| errors.Conflict            | 409                        | application/json           |
-| errors.InviteExpired       | 410                        | application/json           |
-| errors.UnprocessableEntity | 422                        | application/json           |
-| errors.RateLimitExceeded   | 429                        | application/json           |
-| errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
