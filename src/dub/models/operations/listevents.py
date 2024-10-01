@@ -12,8 +12,8 @@ from dub.types import BaseModel
 from dub.utils import FieldMetadata, QueryParamMetadata
 from enum import Enum
 import pydantic
-from typing import List, Optional, TypedDict, Union
-from typing_extensions import Annotated, NotRequired
+from typing import List, Optional, Union
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class QueryParamEvent(str, Enum):
