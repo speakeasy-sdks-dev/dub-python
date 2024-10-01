@@ -5,70 +5,16 @@
 
 ### Available Operations
 
-* [create](#create) - Create a new link
 * [list](#list) - Retrieve a list of links
+* [create](#create) - Create a new link
 * [count](#count) - Retrieve links count
 * [get](#get) - Retrieve a link
-* [update](#update) - Update a link
 * [delete](#delete) - Delete a link
+* [update](#update) - Update a link
 * [create_many](#create_many) - Bulk create links
-* [update_many](#update_many) - Bulk update links
 * [delete_many](#delete_many) - Bulk delete links
+* [update_many](#update_many) - Bulk update links
 * [upsert](#upsert) - Upsert a link
-
-## create
-
-Create a new link for the authenticated workspace.
-
-### Example Usage
-
-```python
-from dub import Dub
-
-s = Dub(
-    token="DUB_API_KEY",
-)
-
-res = s.links.create(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
-})
-
-if res is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `request`                                                                            | [operations.CreateLinkRequestBody](../../models/operations/createlinkrequestbody.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
-| `retries`                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                     | :heavy_minus_sign:                                                                   | Configuration to override the default retry behavior of the client.                  |
-
-### Response
-
-**[components.LinkSchema](../../models/components/linkschema.md)**
-
-### Errors
-
-| Error Object               | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.BadRequest          | 400                        | application/json           |
-| errors.Unauthorized        | 401                        | application/json           |
-| errors.Forbidden           | 403                        | application/json           |
-| errors.NotFound            | 404                        | application/json           |
-| errors.Conflict            | 409                        | application/json           |
-| errors.InviteExpired       | 410                        | application/json           |
-| errors.UnprocessableEntity | 422                        | application/json           |
-| errors.RateLimitExceeded   | 429                        | application/json           |
-| errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
-
 
 ## list
 
@@ -111,7 +57,7 @@ if res is not None:
 
 ### Errors
 
-| Error Object               | Status Code                | Content Type               |
+| Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -122,8 +68,60 @@ if res is not None:
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
+## create
+
+Create a new link for the authenticated workspace.
+
+### Example Usage
+
+```python
+from dub import Dub
+
+s = Dub(
+    token="DUB_API_KEY",
+)
+
+res = s.links.create(request={
+    "url": "https://google.com",
+    "external_id": "123456",
+    "tag_ids": [
+        "clux0rgak00011...",
+    ],
+})
+
+if res is not None:
+    # handle response
+    pass
+
+```
+
+### Parameters
+
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `request`                                                                            | [operations.CreateLinkRequestBody](../../models/operations/createlinkrequestbody.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| `retries`                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                     | :heavy_minus_sign:                                                                   | Configuration to override the default retry behavior of the client.                  |
+
+### Response
+
+**[components.LinkSchema](../../models/components/linkschema.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.BadRequest          | 400                        | application/json           |
+| errors.Unauthorized        | 401                        | application/json           |
+| errors.Forbidden           | 403                        | application/json           |
+| errors.NotFound            | 404                        | application/json           |
+| errors.Conflict            | 409                        | application/json           |
+| errors.InviteExpired       | 410                        | application/json           |
+| errors.UnprocessableEntity | 422                        | application/json           |
+| errors.RateLimitExceeded   | 429                        | application/json           |
+| errors.InternalServerError | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## count
 
@@ -159,7 +157,7 @@ if res is not None:
 
 ### Errors
 
-| Error Object               | Status Code                | Content Type               |
+| Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -170,8 +168,7 @@ if res is not None:
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
-
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## get
 
@@ -210,7 +207,7 @@ if res is not None:
 
 ### Errors
 
-| Error Object               | Status Code                | Content Type               |
+| Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -221,8 +218,54 @@ if res is not None:
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
+## delete
+
+Delete a link for the authenticated workspace.
+
+### Example Usage
+
+```python
+from dub import Dub
+
+s = Dub(
+    token="DUB_API_KEY",
+)
+
+res = s.links.delete(link_id="<value>")
+
+if res is not None:
+    # handle response
+    pass
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                             | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `link_id`                                                                                                                             | *str*                                                                                                                                 | :heavy_check_mark:                                                                                                                    | The id of the link to delete. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`. |
+| `retries`                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                      | :heavy_minus_sign:                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                   |
+
+### Response
+
+**[operations.DeleteLinkResponseBody](../../models/operations/deletelinkresponsebody.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.BadRequest          | 400                        | application/json           |
+| errors.Unauthorized        | 401                        | application/json           |
+| errors.Forbidden           | 403                        | application/json           |
+| errors.NotFound            | 404                        | application/json           |
+| errors.Conflict            | 409                        | application/json           |
+| errors.InviteExpired       | 410                        | application/json           |
+| errors.UnprocessableEntity | 422                        | application/json           |
+| errors.RateLimitExceeded   | 429                        | application/json           |
+| errors.InternalServerError | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update
 
@@ -265,7 +308,7 @@ if res is not None:
 
 ### Errors
 
-| Error Object               | Status Code                | Content Type               |
+| Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -276,56 +319,7 @@ if res is not None:
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
-
-
-## delete
-
-Delete a link for the authenticated workspace.
-
-### Example Usage
-
-```python
-from dub import Dub
-
-s = Dub(
-    token="DUB_API_KEY",
-)
-
-res = s.links.delete(link_id="<value>")
-
-if res is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                                                                                                             | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `link_id`                                                                                                                             | *str*                                                                                                                                 | :heavy_check_mark:                                                                                                                    | The id of the link to delete. You may use either `linkId` (obtained via `/links/info` endpoint) or `externalId` prefixed with `ext_`. |
-| `retries`                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                      | :heavy_minus_sign:                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                   |
-
-### Response
-
-**[operations.DeleteLinkResponseBody](../../models/operations/deletelinkresponsebody.md)**
-
-### Errors
-
-| Error Object               | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.BadRequest          | 400                        | application/json           |
-| errors.Unauthorized        | 401                        | application/json           |
-| errors.Forbidden           | 403                        | application/json           |
-| errors.NotFound            | 404                        | application/json           |
-| errors.Conflict            | 409                        | application/json           |
-| errors.InviteExpired       | 410                        | application/json           |
-| errors.UnprocessableEntity | 422                        | application/json           |
-| errors.RateLimitExceeded   | 429                        | application/json           |
-| errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
-
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## create_many
 
@@ -369,7 +363,7 @@ if res is not None:
 
 ### Errors
 
-| Error Object               | Status Code                | Content Type               |
+| Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -380,8 +374,59 @@ if res is not None:
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
+## delete_many
+
+Bulk delete up to 100 links for the authenticated workspace.
+
+### Example Usage
+
+```python
+from dub import Dub
+
+s = Dub(
+    token="DUB_API_KEY",
+)
+
+res = s.links.delete_many(request={
+    "link_ids": [
+        "clux0rgak00011...",
+        "clux0rgak00022...",
+    ],
+})
+
+if res is not None:
+    # handle response
+    pass
+
+```
+
+### Parameters
+
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `request`                                                                              | [operations.BulkDeleteLinksRequest](../../models/operations/bulkdeletelinksrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |
+
+### Response
+
+**[operations.BulkDeleteLinksResponseBody](../../models/operations/bulkdeletelinksresponsebody.md)**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.BadRequest          | 400                        | application/json           |
+| errors.Unauthorized        | 401                        | application/json           |
+| errors.Forbidden           | 403                        | application/json           |
+| errors.NotFound            | 404                        | application/json           |
+| errors.Conflict            | 409                        | application/json           |
+| errors.InviteExpired       | 410                        | application/json           |
+| errors.UnprocessableEntity | 422                        | application/json           |
+| errors.RateLimitExceeded   | 429                        | application/json           |
+| errors.InternalServerError | 500                        | application/json           |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## update_many
 
@@ -427,7 +472,7 @@ if res is not None:
 
 ### Errors
 
-| Error Object               | Status Code                | Content Type               |
+| Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -438,61 +483,7 @@ if res is not None:
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
-
-
-## delete_many
-
-Bulk delete up to 100 links for the authenticated workspace.
-
-### Example Usage
-
-```python
-from dub import Dub
-
-s = Dub(
-    token="DUB_API_KEY",
-)
-
-res = s.links.delete_many(request={
-    "link_ids": [
-        "clux0rgak00011...",
-        "clux0rgak00022...",
-    ],
-})
-
-if res is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `request`                                                                              | [operations.BulkDeleteLinksRequest](../../models/operations/bulkdeletelinksrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
-| `retries`                                                                              | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                       | :heavy_minus_sign:                                                                     | Configuration to override the default retry behavior of the client.                    |
-
-### Response
-
-**[operations.BulkDeleteLinksResponseBody](../../models/operations/bulkdeletelinksresponsebody.md)**
-
-### Errors
-
-| Error Object               | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| errors.BadRequest          | 400                        | application/json           |
-| errors.Unauthorized        | 401                        | application/json           |
-| errors.Forbidden           | 403                        | application/json           |
-| errors.NotFound            | 404                        | application/json           |
-| errors.Conflict            | 409                        | application/json           |
-| errors.InviteExpired       | 410                        | application/json           |
-| errors.UnprocessableEntity | 422                        | application/json           |
-| errors.RateLimitExceeded   | 429                        | application/json           |
-| errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
-
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ## upsert
 
@@ -534,7 +525,7 @@ if res is not None:
 
 ### Errors
 
-| Error Object               | Status Code                | Content Type               |
+| Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -545,4 +536,4 @@ if res is not None:
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
