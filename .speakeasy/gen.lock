@@ -13,7 +13,7 @@ management:
 features:
   python:
     additionalDependencies: 1.0.0
-    constsAndDefaults: 1.0.3
+    constsAndDefaults: 1.0.4
     core: 5.5.8
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.0
@@ -36,6 +36,7 @@ features:
     unions: 3.0.2
 generatedFiles:
   - .gitattributes
+  - .python-version
   - .vscode/settings.json
   - CONTRIBUTING.md
   - USAGE.md
