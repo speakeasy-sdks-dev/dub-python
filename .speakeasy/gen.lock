@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 596f43d83d9b42d6000040c93ba5018d
+  docChecksum: ab9472ca83810e1cd6dff0090ec48b09
   docVersion: 0.0.1
-  speakeasyVersion: 1.404.5
-  generationVersion: 2.426.2
+  speakeasyVersion: internal
+  generationVersion: 2.428.4
   releaseVersion: 0.10.5
-  configChecksum: 6b01942061f48e729f98b19eb05ed8f7
+  configChecksum: 2977dcbb64936fb9df564abf8d38fb53
   repoURL: https://github.com/dubinc/dub-python.git
   installationURL: https://github.com/dubinc/dub-python.git
   published: true
@@ -14,14 +14,14 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.3
-    core: 5.5.6
+    core: 5.5.7
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.0
     enumUnions: 0.1.0
     envVarSecurityUsage: 0.3.1
-    errors: 3.0.0
+    errors: 3.0.1
     examples: 3.0.0
-    flattening: 3.0.0
+    flattening: 3.1.0
     globalSecurity: 3.0.2
     globalSecurityCallbacks: 1.0.0
     globalSecurityFlattening: 1.0.0
