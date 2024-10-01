@@ -169,10 +169,10 @@ asyncio.run(main())
 
 ### [domains](docs/sdks/domains/README.md)
 
-* [create](docs/sdks/domains/README.md#create) - Create a domain
 * [list](docs/sdks/domains/README.md#list) - Retrieve a list of domains
-* [update](docs/sdks/domains/README.md#update) - Update a domain
+* [create](docs/sdks/domains/README.md#create) - Create a domain
 * [delete](docs/sdks/domains/README.md#delete) - Delete a domain
+* [update](docs/sdks/domains/README.md#update) - Update a domain
 
 
 ### [events](docs/sdks/events/README.md)
@@ -181,15 +181,15 @@ asyncio.run(main())
 
 ### [links](docs/sdks/links/README.md)
 
-* [create](docs/sdks/links/README.md#create) - Create a new link
 * [list](docs/sdks/links/README.md#list) - Retrieve a list of links
+* [create](docs/sdks/links/README.md#create) - Create a new link
 * [count](docs/sdks/links/README.md#count) - Retrieve links count
 * [get](docs/sdks/links/README.md#get) - Retrieve a link
-* [update](docs/sdks/links/README.md#update) - Update a link
 * [delete](docs/sdks/links/README.md#delete) - Delete a link
+* [update](docs/sdks/links/README.md#update) - Update a link
 * [create_many](docs/sdks/links/README.md#create_many) - Bulk create links
-* [update_many](docs/sdks/links/README.md#update_many) - Bulk update links
 * [delete_many](docs/sdks/links/README.md#delete_many) - Bulk delete links
+* [update_many](docs/sdks/links/README.md#update_many) - Bulk update links
 * [upsert](docs/sdks/links/README.md#upsert) - Upsert a link
 
 ### [metatags](docs/sdks/metatags/README.md)
@@ -202,10 +202,10 @@ asyncio.run(main())
 
 ### [tags](docs/sdks/tags/README.md)
 
-* [create](docs/sdks/tags/README.md#create) - Create a new tag
 * [list](docs/sdks/tags/README.md#list) - Retrieve a list of tags
-* [update](docs/sdks/tags/README.md#update) - Update a tag
+* [create](docs/sdks/tags/README.md#create) - Create a new tag
 * [delete](docs/sdks/tags/README.md#delete) - Delete a tag
+* [update](docs/sdks/tags/README.md#update) - Update a tag
 
 ### [track](docs/sdks/track/README.md)
 
@@ -224,9 +224,20 @@ asyncio.run(main())
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Handling errors in this SDK should largely match your expectations.  All operations return a response object or raise an error.  If Error objects are specified in your OpenAPI Spec, the SDK will raise the appropriate Error type.
+Handling errors in this SDK should largely match your expectations. All operations return a response object or raise an exception.
 
-| Error Object               | Status Code                | Content Type               |
+By default, an API error will raise a errors.SDKError exception, which has the following properties:
+
+| Property        | Type             | Description           |
+|-----------------|------------------|-----------------------|
+| `.status_code`  | *int*            | The HTTP status code  |
+| `.message`      | *str*            | The error message     |
+| `.raw_response` | *httpx.Response* | The raw HTTP response |
+| `.body`         | *str*            | The response content  |
+
+When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `list_async` method may raise the following exceptions:
+
+| Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.BadRequest          | 400                        | application/json           |
 | errors.Unauthorized        | 401                        | application/json           |
@@ -237,7 +248,7 @@ Handling errors in this SDK should largely match your expectations.  All operati
 | errors.UnprocessableEntity | 422                        | application/json           |
 | errors.RateLimitExceeded   | 429                        | application/json           |
 | errors.InternalServerError | 500                        | application/json           |
-| errors.SDKError            | 4xx-5xx                    | */*                        |
+| errors.SDKError            | 4XX, 5XX                   | \*/\*                      |
 
 ### Example
 
@@ -251,17 +262,18 @@ s = Dub(
 
 res = None
 try:
-    res = s.links.create(request={
-        "url": "https://google.com",
-        "external_id": "123456",
-        "tag_ids": [
-            "clux0rgak00011...",
-        ],
+    res = s.links.list(request={
+        "page": 1,
+        "page_size": 50,
     })
 
     if res is not None:
-        # handle response
-        pass
+        while True:
+            # handle items
+
+            res = res.next()
+            if res is None:
+                break
 
 except errors.BadRequest as e:
     # handle e.data: errors.BadRequestData
@@ -317,17 +329,18 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-res = s.links.create(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
+res = s.links.list(request={
+    "page": 1,
+    "page_size": 50,
 })
 
 if res is not None:
-    # handle response
-    pass
+    while True:
+        # handle items
+
+        res = res.next()
+        if res is None:
+            break
 
 ```
 
@@ -343,17 +356,18 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-res = s.links.create(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
+res = s.links.list(request={
+    "page": 1,
+    "page_size": 50,
 })
 
 if res is not None:
-    # handle response
-    pass
+    while True:
+        # handle items
+
+        res = res.next()
+        if res is None:
+            break
 
 ```
 <!-- End Server Selection [server] -->
@@ -458,17 +472,18 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-res = s.links.create(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
+res = s.links.list(request={
+    "page": 1,
+    "page_size": 50,
 })
 
 if res is not None:
-    # handle response
-    pass
+    while True:
+        # handle items
+
+        res = res.next()
+        if res is None:
+            break
 
 ```
 <!-- End Authentication [security] -->
@@ -487,18 +502,19 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-res = s.links.create(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
+res = s.links.list(request={
+    "page": 1,
+    "page_size": 50,
 },
     RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
 if res is not None:
-    # handle response
-    pass
+    while True:
+        # handle items
+
+        res = res.next()
+        if res is None:
+            break
 
 ```
 
@@ -512,17 +528,18 @@ s = Dub(
     token="DUB_API_KEY",
 )
 
-res = s.links.create(request={
-    "url": "https://google.com",
-    "external_id": "123456",
-    "tag_ids": [
-        "clux0rgak00011...",
-    ],
+res = s.links.list(request={
+    "page": 1,
+    "page_size": 50,
 })
 
 if res is not None:
-    # handle response
-    pass
+    while True:
+        # handle items
+
+        res = res.next()
+        if res is None:
+            break
 
 ```
 <!-- End Retries [retries] -->
