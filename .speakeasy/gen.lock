@@ -1,10 +1,10 @@
 lockVersion: 2.0.0
 id: ab657d60-207e-43a4-8cc8-692a672950ed
 management:
-  docChecksum: 8620b0f24a0133906ad7b91d73cc1651
+  docChecksum: 15dedf306feb7e38a82d284d39e0bfc5
   docVersion: 0.0.1
-  speakeasyVersion: 1.410.0
-  generationVersion: 2.434.1
+  speakeasyVersion: internal
+  generationVersion: 2.438.3
   releaseVersion: 0.11.1
   configChecksum: bbc33a1ef476c1847c01c5d3b73492de
   repoURL: https://github.com/dubinc/dub-python.git
@@ -14,7 +14,7 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.4
-    core: 5.5.8
+    core: 5.6.0
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.0
     enumUnions: 0.1.0
@@ -249,6 +249,7 @@ generatedFiles:
   - src/dub/_hooks/__init__.py
   - src/dub/_hooks/sdkhooks.py
   - src/dub/_hooks/types.py
+  - src/dub/_version.py
   - src/dub/analytics.py
   - src/dub/basesdk.py
   - src/dub/domains.py
