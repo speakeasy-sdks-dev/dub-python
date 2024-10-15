@@ -9,6 +9,236 @@ from typing import Any, List, Optional, Union, cast
 
 
 class Tags(BaseSDK):
+    def list(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+    ) -> Optional[List[components.TagSchema]]:
+        r"""Retrieve a list of tags
+
+        Retrieve a list of tags for the authenticated workspace.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        req = self.build_request(
+            method="GET",
+            path="/tags",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                operation_id="getTags",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return utils.unmarshal_json(
+                http_res.text, Optional[List[components.TagSchema]]
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
+            raise errors.BadRequest(data=data)
+        if utils.match_response(http_res, "401", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
+            raise errors.Unauthorized(data=data)
+        if utils.match_response(http_res, "403", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
+            raise errors.Forbidden(data=data)
+        if utils.match_response(http_res, "404", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
+            raise errors.NotFound(data=data)
+        if utils.match_response(http_res, "409", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
+            raise errors.Conflict(data=data)
+        if utils.match_response(http_res, "410", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
+            raise errors.InviteExpired(data=data)
+        if utils.match_response(http_res, "422", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
+            raise errors.UnprocessableEntity(data=data)
+        if utils.match_response(http_res, "429", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
+            raise errors.RateLimitExceeded(data=data)
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
+            raise errors.InternalServerError(data=data)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    async def list_async(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+    ) -> Optional[List[components.TagSchema]]:
+        r"""Retrieve a list of tags
+
+        Retrieve a list of tags for the authenticated workspace.
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        req = self.build_request_async(
+            method="GET",
+            path="/tags",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/json",
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                operation_id="getTags",
+                oauth2_scopes=[],
+                security_source=self.sdk_configuration.security,
+            ),
+            request=req,
+            error_status_codes=[
+                "400",
+                "401",
+                "403",
+                "404",
+                "409",
+                "410",
+                "422",
+                "429",
+                "4XX",
+                "500",
+                "5XX",
+            ],
+            retry_config=retry_config,
+        )
+
+        data: Any = None
+        if utils.match_response(http_res, "200", "application/json"):
+            return utils.unmarshal_json(
+                http_res.text, Optional[List[components.TagSchema]]
+            )
+        if utils.match_response(http_res, "400", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
+            raise errors.BadRequest(data=data)
+        if utils.match_response(http_res, "401", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
+            raise errors.Unauthorized(data=data)
+        if utils.match_response(http_res, "403", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
+            raise errors.Forbidden(data=data)
+        if utils.match_response(http_res, "404", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
+            raise errors.NotFound(data=data)
+        if utils.match_response(http_res, "409", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
+            raise errors.Conflict(data=data)
+        if utils.match_response(http_res, "410", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
+            raise errors.InviteExpired(data=data)
+        if utils.match_response(http_res, "422", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
+            raise errors.UnprocessableEntity(data=data)
+        if utils.match_response(http_res, "429", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
+            raise errors.RateLimitExceeded(data=data)
+        if utils.match_response(http_res, "500", "application/json"):
+            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
+            raise errors.InternalServerError(data=data)
+        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise errors.SDKError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise errors.SDKError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
     def create(
         self,
         *,
@@ -125,15 +355,17 @@ class Tags(BaseSDK):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
         if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKError(
-                "API error occurred", http_res.status_code, http_res.text, http_res
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
 
         content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
         raise errors.SDKError(
             f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
             http_res.status_code,
-            http_res.text,
+            http_res_text,
             http_res,
         )
 
@@ -253,29 +485,33 @@ class Tags(BaseSDK):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
         if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKError(
-                "API error occurred", http_res.status_code, http_res.text, http_res
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
 
         content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
         raise errors.SDKError(
             f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
             http_res.status_code,
-            http_res.text,
+            http_res_text,
             http_res,
         )
 
-    def list(
+    def delete(
         self,
         *,
+        id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Optional[List[components.TagSchema]]:
-        r"""Retrieve a list of tags
+    ) -> Optional[operations.DeleteTagResponseBody]:
+        r"""Delete a tag
 
-        Retrieve a list of tags for the authenticated workspace.
+        Delete a tag from the workspace. All existing links will still work, but they will no longer be associated with this tag.
 
+        :param id: The ID of the tag to delete.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -287,14 +523,19 @@ class Tags(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+
+        request = operations.DeleteTagRequest(
+            id=id,
+        )
+
         req = self.build_request(
-            method="GET",
-            path="/tags",
+            method="DELETE",
+            path="/tags/{id}",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
-            request_has_path_params=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
@@ -312,7 +553,7 @@ class Tags(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="getTags",
+                operation_id="deleteTag",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
@@ -336,7 +577,7 @@ class Tags(BaseSDK):
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[List[components.TagSchema]]
+                http_res.text, Optional[operations.DeleteTagResponseBody]
             )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
@@ -366,29 +607,33 @@ class Tags(BaseSDK):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
         if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKError(
-                "API error occurred", http_res.status_code, http_res.text, http_res
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
 
         content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
         raise errors.SDKError(
             f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
             http_res.status_code,
-            http_res.text,
+            http_res_text,
             http_res,
         )
 
-    async def list_async(
+    async def delete_async(
         self,
         *,
+        id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
-    ) -> Optional[List[components.TagSchema]]:
-        r"""Retrieve a list of tags
+    ) -> Optional[operations.DeleteTagResponseBody]:
+        r"""Delete a tag
 
-        Retrieve a list of tags for the authenticated workspace.
+        Delete a tag from the workspace. All existing links will still work, but they will no longer be associated with this tag.
 
+        :param id: The ID of the tag to delete.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -400,14 +645,19 @@ class Tags(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+
+        request = operations.DeleteTagRequest(
+            id=id,
+        )
+
         req = self.build_request_async(
-            method="GET",
-            path="/tags",
+            method="DELETE",
+            path="/tags/{id}",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
-            request_has_path_params=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/json",
@@ -425,7 +675,7 @@ class Tags(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="getTags",
+                operation_id="deleteTag",
                 oauth2_scopes=[],
                 security_source=self.sdk_configuration.security,
             ),
@@ -449,7 +699,7 @@ class Tags(BaseSDK):
         data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(
-                http_res.text, Optional[List[components.TagSchema]]
+                http_res.text, Optional[operations.DeleteTagResponseBody]
             )
         if utils.match_response(http_res, "400", "application/json"):
             data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
@@ -479,15 +729,17 @@ class Tags(BaseSDK):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
         if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKError(
-                "API error occurred", http_res.status_code, http_res.text, http_res
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
 
         content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
         raise errors.SDKError(
             f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
             http_res.status_code,
-            http_res.text,
+            http_res_text,
             http_res,
         )
 
@@ -614,15 +866,17 @@ class Tags(BaseSDK):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
         if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
             raise errors.SDKError(
-                "API error occurred", http_res.status_code, http_res.text, http_res
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
 
         content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
         raise errors.SDKError(
             f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
             http_res.status_code,
-            http_res.text,
+            http_res_text,
             http_res,
         )
 
@@ -749,254 +1003,16 @@ class Tags(BaseSDK):
             data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
             raise errors.InternalServerError(data=data)
         if utils.match_response(http_res, ["4XX", "5XX"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
             raise errors.SDKError(
-                "API error occurred", http_res.status_code, http_res.text, http_res
+                "API error occurred", http_res.status_code, http_res_text, http_res
             )
 
         content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
         raise errors.SDKError(
             f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
             http_res.status_code,
-            http_res.text,
-            http_res,
-        )
-
-    def delete(
-        self,
-        *,
-        id: str,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-    ) -> Optional[operations.DeleteTagResponseBody]:
-        r"""Delete a tag
-
-        Delete a tag from the workspace. All existing links will still work, but they will no longer be associated with this tag.
-
-        :param id: The ID of the tag to delete.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = operations.DeleteTagRequest(
-            id=id,
-        )
-
-        req = self.build_request(
-            method="DELETE",
-            path="/tags/{id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            security=self.sdk_configuration.security,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="deleteTag",
-                oauth2_scopes=[],
-                security_source=self.sdk_configuration.security,
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "410",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, Optional[operations.DeleteTagResponseBody]
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
-            raise errors.BadRequest(data=data)
-        if utils.match_response(http_res, "401", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
-            raise errors.Unauthorized(data=data)
-        if utils.match_response(http_res, "403", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
-            raise errors.Forbidden(data=data)
-        if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
-            raise errors.NotFound(data=data)
-        if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
-            raise errors.Conflict(data=data)
-        if utils.match_response(http_res, "410", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
-            raise errors.InviteExpired(data=data)
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
-            raise errors.UnprocessableEntity(data=data)
-        if utils.match_response(http_res, "429", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
-            raise errors.RateLimitExceeded(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
-            raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
-            raise errors.SDKError(
-                "API error occurred", http_res.status_code, http_res.text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res.text,
-            http_res,
-        )
-
-    async def delete_async(
-        self,
-        *,
-        id: str,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-    ) -> Optional[operations.DeleteTagResponseBody]:
-        r"""Delete a tag
-
-        Delete a tag from the workspace. All existing links will still work, but they will no longer be associated with this tag.
-
-        :param id: The ID of the tag to delete.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = operations.DeleteTagRequest(
-            id=id,
-        )
-
-        req = self.build_request_async(
-            method="DELETE",
-            path="/tags/{id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/json",
-            security=self.sdk_configuration.security,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="deleteTag",
-                oauth2_scopes=[],
-                security_source=self.sdk_configuration.security,
-            ),
-            request=req,
-            error_status_codes=[
-                "400",
-                "401",
-                "403",
-                "404",
-                "409",
-                "410",
-                "422",
-                "429",
-                "4XX",
-                "500",
-                "5XX",
-            ],
-            retry_config=retry_config,
-        )
-
-        data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
-            return utils.unmarshal_json(
-                http_res.text, Optional[operations.DeleteTagResponseBody]
-            )
-        if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.BadRequestData)
-            raise errors.BadRequest(data=data)
-        if utils.match_response(http_res, "401", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnauthorizedData)
-            raise errors.Unauthorized(data=data)
-        if utils.match_response(http_res, "403", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ForbiddenData)
-            raise errors.Forbidden(data=data)
-        if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.NotFoundData)
-            raise errors.NotFound(data=data)
-        if utils.match_response(http_res, "409", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.ConflictData)
-            raise errors.Conflict(data=data)
-        if utils.match_response(http_res, "410", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InviteExpiredData)
-            raise errors.InviteExpired(data=data)
-        if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.UnprocessableEntityData)
-            raise errors.UnprocessableEntity(data=data)
-        if utils.match_response(http_res, "429", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.RateLimitExceededData)
-            raise errors.RateLimitExceeded(data=data)
-        if utils.match_response(http_res, "500", "application/json"):
-            data = utils.unmarshal_json(http_res.text, errors.InternalServerErrorData)
-            raise errors.InternalServerError(data=data)
-        if utils.match_response(http_res, ["4XX", "5XX"], "*"):
-            raise errors.SDKError(
-                "API error occurred", http_res.status_code, http_res.text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        raise errors.SDKError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res.text,
+            http_res_text,
             http_res,
         )
