@@ -311,40 +311,6 @@ except errors.SDKError as e:
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
-### Select Server by Index
-
-You can override the default server globally by passing a server index to the `server_idx: int` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
-
-| # | Server | Variables |
-| - | ------ | --------- |
-| 0 | `https://api.dub.co` | None |
-
-#### Example
-
-```python
-from dub import Dub
-
-s = Dub(
-    server_idx=0,
-    token="DUB_API_KEY",
-)
-
-res = s.links.list(request={
-    "page": 1,
-    "page_size": 50,
-})
-
-if res is not None:
-    while True:
-        # handle items
-
-        res = res.next()
-        if res is None:
-            break
-
-```
-
-
 ### Override Server URL Per-Client
 
 The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
